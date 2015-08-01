@@ -221,7 +221,7 @@ def remote(args, mirror):
                     path += str(category)
             else:
                 path = '/search/' + '/'.join(str(i) for i in (
-                                                '+'.join(args.search[1:]), # the result before the fix was: /search/search+query/0/7/0, now ignoring the search subcommand
+                                                '+'.join(args.search),
                                                 page, sort,
                                                 category))
 
@@ -494,6 +494,11 @@ def main():
     parser.add_argument('-t', '--transmission',
                         action='store_true',
                         help='open magnets with transmission-remote')
+    parser.add_argument('-d', dest='print_exit',
+                        action='store_true',
+                        help='print list and exit')
+    parser.add_argument('-n', type=int, dest='specific',
+                        help='select specific torrent by number')
     parser.add_argument('-P', '--port', dest='port',
                         help='transmission-remote rpc port. default is 9091')
     parser.add_argument('-C', '--custom', dest='command',
@@ -596,6 +601,10 @@ def main():
     elif args.download_all:
         print('Downloading all results')
         choices = range(len(mags))
+    elif args.specific:
+        choices = [args.specific]
+    elif args.print_exit:
+        return
     else:
         # New input loop to support different link options
         while True:
