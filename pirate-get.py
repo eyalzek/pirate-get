@@ -186,8 +186,9 @@ def remote(args, mirror):
         raise ValueError('Please provide an integer greater than 0 '
                          'for the number of pages to fetch.')
 
-    if str(args.category) in categories.values():
-        category = args.category
+    if args.category.isdigit():
+        if int(args.category) in categories.values():
+            category = args.category
     elif args.category in categories.keys():
         category = categories[args.category]
     else:
@@ -654,7 +655,7 @@ def main():
                 elif code == 'f':
                     print_file_lists(choices, mags, site, identifiers)
                 elif code == 'p':
-                    print_search_results(mags, sizes, uploaded)
+                    print_search_results(mags, sizes, uploaded, local=args.database)
                 elif code == 'm':
                     save_magnets(choices, mags,
                                   config.get('Save', 'directory'))
