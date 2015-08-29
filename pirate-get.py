@@ -353,7 +353,10 @@ def print_search_results(mags, sizes, uploaded, local):
         cur_color = 'zebra_0' if cur_color == 'zebra_1' else 'zebra_1'
 
         name = re.search(r'dn=([^\&]*)', magnet[0])
-        torrent_name = parse.unquote(name.group(1)).replace('+', ' ')
+        try:
+            torrent_name = parse.unquote(name.group(1)).replace('+', ' ')
+        except AttributeError:
+            torrent_name = "unknown"
 
         if local:
             line = '{:5}  {:{length}}'
