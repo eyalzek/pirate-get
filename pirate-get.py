@@ -378,7 +378,10 @@ def print_search_results(mags, sizes, uploaded, local):
                        size, unit, date, torrent_name[:columns - 52]]
 
         # enhanced print output with justified columns
-        print(line.format(*content, length=columns - 52), color=cur_color)
+        try:
+            print(line.format(*content, length=columns - 52), color=cur_color)
+        except UnicodeEncodeError:
+            continue
 
 
 def print_descriptions(chosen_links, mags, site, identifiers):
@@ -706,7 +709,4 @@ def main():
 
 
 if __name__ == '__main__':
-    try:
-        main()
-    except UnicodeEncodeError:
-        pass
+    main()
