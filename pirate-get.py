@@ -550,14 +550,14 @@ def main():
         cur_color = 'zebra_0'
         for key, value in sorted(categories.items()) :
             cur_color = 'zebra_0' if cur_color == 'zebra_1' else 'zebra_1'
-            print((value).encode('utf-8'), '\t', key, sep='', color=cur_color)
+            print(str(value), '\t', key, sep='', color=cur_color)
         return
 
     if args.list_sorts:
         cur_color = 'zebra_0'
         for key, value in sorted(sorts.items()):
             cur_color = 'zebra_0' if cur_color == 'zebra_1' else 'zebra_1'
-            print((value).encode('utf-8'), '\t', key, sep='', color=cur_color)
+            print(str(value), '\t', key, sep='', color=cur_color)
         return
 
     if args.database or config.getboolean('LocalDB', 'enabled'):
