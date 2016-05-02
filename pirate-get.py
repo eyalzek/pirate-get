@@ -534,7 +534,7 @@ def main():
     if args.save_directory:
         config.set('Save', 'directory', args.save_directory)
 
-    transmission_command = ['transmission-remote']
+    transmission_command = ['transmission-remote', '-ne']
     if args.port:
         transmission_command.append(args.port)
 
